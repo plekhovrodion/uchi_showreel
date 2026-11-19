@@ -19,7 +19,7 @@ description: Этап 1 производства ролика Учи.ру. Пр�
 
 - Node, npm, Remotion (`npx --no-install remotion --version`), Chromium/Playwright, ffmpeg, ffprobe.
 - Python-модули Pillow, Whisper (Whisper нужен только для транскрипции и черновых таймкодов).
-- `ELEVENLABS_API_KEY` в окружении.
+- Ключ ElevenLabs: `scripts/check_key.py` ищет `ELEVENLABS_API_KEY` в окружении и в файле `.env` (папка проекта, текущая папка и родители, `~/.config/uchi_showreel/`), проверяет формат (`sk_...`) и спрашивает у ElevenLabs, принят ли ключ. Ключ не печатается. Образец файла: `.env.example` в корне репозитория.
 - Шрифты проверяет `scripts/check_fonts.py` (нужен `fonttools`). Он ищет файлы в `assets/fonts/` проекта и среди системных шрифтов, читает из файла семейство, начертание и вес и проверяет полную кириллицу и цифры. Нужны ровно два начертания: **Oceanic Grotesk Condensed ExtraBold** (вес 800) и **Factor A Regular** (вес 400). Файл с другим начертанием (например, Oceanic Regular или Factor A Medium) не подходит. Результат: `fonts-check.json`, статусы `ok`, `missing`, `wrong_style`, `no_cyrillic`.
 - Утверждённый логотип: файл `assets/logo.svg` или `assets/logo.png`.
 - Доступ в сеть до `api.elevenlabs.io`.
@@ -38,7 +38,7 @@ description: Этап 1 производства ролика Учи.ру. Пр�
 
 ## Что запросить у человека
 
-Файлы шрифтов, утверждённый логотип, настройку секрета `ELEVENLABS_API_KEY` или готовую запись диктора, выбранный голос. Не проси присылать ключ в чат: попроси добавить его в секреты окружения.
+Файлы шрифтов, утверждённый логотип, настройку секрета `ELEVENLABS_API_KEY` или готовую запись диктора, выбранный голос. Не проси присылать ключ в чат: попроси скопировать `.env.example` в `.env` и вписать ключ после `ELEVENLABS_API_KEY=` (или добавить его в секреты окружения).
 
 ## Готово, когда
 

@@ -6,6 +6,7 @@ STAGES = ["preflight", "script", "gate_script", "assets", "gate_assets", "images
 GATES = {"gate_script": "script", "gate_assets": "assets"}
 SKIPPABLE = {"images"}
 FONT_STAGES = {"assets", "animation"}
+KEY_STAGES = {"images", "voiceover"}
 
 def fonts_gate(a, s):
     f = os.path.join(a.dir, "fonts-check.json")
@@ -19,6 +20,23 @@ def fonts_gate(a, s):
         sys.exit(f"Шрифты не подходят ({bad}). Запросите файлы у человека. Продолжить на временных шрифтах можно только так: "
                  f"state.py start {a.dir} {a.stage} --preview-fonts --by \"человек согласился на временные шрифты\"")
     s["preview_fonts"] = {"by": a.by, "problems": bad, "at": now()}
+
+def key_gate(a, s):
+    """Перед генерацией изображений и озвучкой проверяет ключ ElevenLabs (файл .env или окружение)."""
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "uchi-showreel-1-preflight", "scripts"))
+    try:
+        from check_key import check
+    except ImportError:
+        sys.exit("Не найден uchi-showreel-1-preflight/scripts/check_key.py: ставьте скиллы вместе")
+    r = check([a.dir])
+    if r["found"] and r["format_ok"] and r["valid"] is not False:
+        s.pop("no_key", None)
+        if r["valid"] is None: print("Внимание:", r["message"])
+        return
+    if not (a.no_key and a.by):
+        sys.exit(f"Ключ ElevenLabs не годится: {r['message']}. Скопируйте .env.example в .env и впишите ELEVENLABS_API_KEY=... "
+                 f"Если ключа нет и человек согласен на готовую запись или пропуск: state.py start {a.dir} {a.stage} --no-key --by \"<как согласился>\"")
+    s["no_key"] = {"by": a.by, "problem": r["message"], "at": now()}
 
 def path(d): return os.path.join(d, "state.json")
 def load(d):
@@ -35,6 +53,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("cmd"); ap.add_argument("dir"); ap.add_argument("stage", nargs="?")
     ap.add_argument("--by"); ap.add_argument("--note", default="")
     ap.add_argument("--preview-fonts", action="store_true", help="разрешить временные шрифты (только с --by: человек согласился)")
+    ap.add_argument("--no-key", action="store_true", help="продолжить без ключа ElevenLabs (только с --by: человек согласился)")
     a = ap.parse_args()
     if a.cmd == "init":
         os.makedirs(a.dir, exist_ok=True)
@@ -54,6 +73,7 @@ def main():
         p = prev_open(s, a.stage)
         if p: sys.exit(f"Нельзя начать {a.stage}: сначала завершите {p}")
         if a.stage in FONT_STAGES: fonts_gate(a, s)
+        if a.stage in KEY_STAGES: key_gate(a, s)
         st.update(status="doing", at=now())
     elif a.cmd == "done":
         if a.stage in GATES: sys.exit("Гейт утверждается командой approve")

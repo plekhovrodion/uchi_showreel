@@ -56,7 +56,15 @@ python3 skills/uchi-showreel/scripts/state.py status showreel/black-sea
 
 ## Секреты
 
-Ключ ElevenLabs задаётся только переменной окружения `ELEVENLABS_API_KEY`. Его нельзя хранить в репозитории, проекте, логах и артефактах. `.gitignore` исключает `.env` и `*.key`.
+Куда вставлять ключ ElevenLabs:
+
+1. `cp .env.example .env` (в корне репозитория или в папке проекта ролика).
+2. Откройте `.env` и впишите ключ: `ELEVENLABS_API_KEY=sk_...` (без кавычек). Ключ берётся в ElevenLabs: Profile → API Keys.
+3. Проверка: `python3 skills/uchi-showreel-1-preflight/scripts/check_key.py` (покажет, найден ли ключ, откуда, принят ли ElevenLabs; сам ключ не печатает).
+
+Порядок поиска: переменная окружения `ELEVENLABS_API_KEY`, затем `.env` в папке проекта, текущей папке и её родителях, затем `~/.config/uchi_showreel/.env`. Файл `.env` в git не попадает (`.gitignore`), в репозитории лежит только образец `.env.example`. Ключ нельзя хранить в проекте, логах и артефактах и присылать в чат.
+
+Проверка идёт автоматически: в `preflight` и перед этапами `images` и `voiceover` (`state.py start`). Без годного ключа этап не стартует. Если ключа нет и человек согласился на готовую запись диктора, запустите этап с `--no-key --by "<как согласился>"`.
 
 ## Что нужно для финальной версии
 

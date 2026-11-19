@@ -13,6 +13,22 @@ def call(method, path, key, body=None):
     with urllib.request.urlopen(req, timeout=60) as r:
         return json.loads(r.read().decode())
 
+def _load_key():
+    """Ключ: окружение, затем .env (текущая папка и родители, ~/.config/uchi_showreel). Не печатается."""
+    k = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    if k: return k
+    d = os.path.abspath(os.getcwd()); dirs = []
+    for _ in range(5): dirs.append(d); d = os.path.dirname(d)
+    dirs.append(os.path.expanduser("~/.config/uchi_showreel"))
+    for d in dirs:
+        p = os.path.join(d, ".env")
+        if os.path.isfile(p):
+            for line in open(p, encoding="utf-8"):
+                if line.strip().startswith("ELEVENLABS_API_KEY="):
+                    v = line.split("=", 1)[1].strip().strip("\"'")
+                    if v: return v
+    return ""
+
 def main():
     a = argparse.ArgumentParser()
     a.add_argument("--model", required=True); a.add_argument("--prompt", required=True)
@@ -28,8 +44,8 @@ def main():
         if v is not None: body[k] = v
     if o.dry_run:
         print("POST", BASE + "/v1/flows/image"); print(json.dumps(body, ensure_ascii=False, indent=2)); return
-    key = os.environ.get("ELEVENLABS_API_KEY")
-    if not key: sys.exit("ELEVENLABS_API_KEY не задан в окружении")
+    key = _load_key()
+    if not key: sys.exit("Ключ ElevenLabs не найден. Скопируйте .env.example в .env и впишите ELEVENLABS_API_KEY=... (или задайте переменную окружения). Проверка: skills/uchi-showreel-1-preflight/scripts/check_key.py")
     gen = call("POST", "/v1/flows/image", key, body)
     gid = gen["id"]; print("id:", gid, "status:", gen.get("status"))
     end = time.time() + o.timeout

@@ -29,7 +29,11 @@ def main():
             __import__(mod); res[mod.lower()] = True
         except Exception:
             res[mod.lower()] = False
-    res["elevenlabs_key_set"] = bool(os.environ.get("ELEVENLABS_API_KEY"))
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from check_key import check as check_key
+    kr = check_key([proj])
+    res["elevenlabs_key_set"] = kr["found"] and kr["format_ok"] is True and kr["valid"] is not False
+    res["elevenlabs_key"] = {"found": kr["found"], "source": kr["source"], "valid": kr["valid"], "message": kr["message"]}
     chk = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check_fonts.py")
     run([sys.executable, chk, proj, "--quiet"])
     try:
@@ -49,7 +53,7 @@ def main():
     missing = []
     if not res["remotion"]: missing.append("Remotion (запасной рендер: Chromium + ffmpeg)")
     if not res["ffmpeg"] or not res["ffprobe"]: missing.append("ffmpeg/ffprobe")
-    if not res["elevenlabs_key_set"]: missing.append("ELEVENLABS_API_KEY или готовая запись диктора")
+    if not res["elevenlabs_key_set"]: missing.append("ключ ElevenLabs: " + kr["message"] + " (или готовая запись диктора)")
     if not fc["ok"]: missing.append("подходящие шрифты (Oceanic Grotesk Condensed ExtraBold, Factor A Regular): " + "; ".join(f["required"] + " — " + f["message"] for f in fc["fonts"] if f["status"] != "ok"))
     if not res["logo"]: missing.append("утверждённый логотип (assets/logo.svg|png)")
     if not res["network_elevenlabs"]: missing.append("доступ в сеть до api.elevenlabs.io")

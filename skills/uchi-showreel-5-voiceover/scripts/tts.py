@@ -2,6 +2,22 @@
 """Озвучка текста через ElevenLabs (синтез с таймкодами). Ключ: ELEVENLABS_API_KEY."""
 import argparse, base64, json, os, sys, urllib.request
 
+def _load_key():
+    """Ключ: окружение, затем .env (текущая папка и родители, ~/.config/uchi_showreel). Не печатается."""
+    k = os.environ.get("ELEVENLABS_API_KEY", "").strip()
+    if k: return k
+    d = os.path.abspath(os.getcwd()); dirs = []
+    for _ in range(5): dirs.append(d); d = os.path.dirname(d)
+    dirs.append(os.path.expanduser("~/.config/uchi_showreel"))
+    for d in dirs:
+        p = os.path.join(d, ".env")
+        if os.path.isfile(p):
+            for line in open(p, encoding="utf-8"):
+                if line.strip().startswith("ELEVENLABS_API_KEY="):
+                    v = line.split("=", 1)[1].strip().strip("\"'")
+                    if v: return v
+    return ""
+
 def main():
     a = argparse.ArgumentParser()
     a.add_argument("--voice-id", required=True); a.add_argument("--text-file", required=True)
@@ -13,8 +29,8 @@ def main():
     body = {"text": text, "model_id": o.model}
     if o.dry_run:
         print("POST", url); print(json.dumps(body, ensure_ascii=False, indent=2)); return
-    key = os.environ.get("ELEVENLABS_API_KEY")
-    if not key: sys.exit("ELEVENLABS_API_KEY не задан в окружении")
+    key = _load_key()
+    if not key: sys.exit("Ключ ElevenLabs не найден. Скопируйте .env.example в .env и впишите ELEVENLABS_API_KEY=... (или задайте переменную окружения). Проверка: skills/uchi-showreel-1-preflight/scripts/check_key.py")
     req = urllib.request.Request(url, method="POST", data=json.dumps(body).encode(),
         headers={"xi-api-key": key, "Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=120) as r:
