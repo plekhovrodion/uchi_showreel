@@ -2,9 +2,9 @@
 """Проверка окружения для ролика. Пишет <project>/00-preflight.json. Секреты не печатает."""
 import glob, json, os, shutil, subprocess, sys, urllib.error, urllib.request
 
-def run(cmd, t=25):
+def run(cmd, t=25, cwd=None):
     try:
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=t)
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=t, cwd=cwd)
         return r.returncode == 0, (r.stdout + r.stderr).strip()
     except Exception as e:
         return False, str(e)
@@ -15,8 +15,29 @@ def main():
     res = {}
     for tool in ("node", "npm", "ffmpeg", "ffprobe"):
         res[tool] = bool(shutil.which(tool))
-    ok, _ = run(["npx", "--no-install", "remotion", "--version"]) if shutil.which("npx") else (False, "")
+    ok, ver = False, ""
+    if shutil.which("npx"):
+        # Remotion ставится локально в проект: ищем в папке ролика, в её родителях и в текущей папке
+        for d in dict.fromkeys([os.path.abspath(proj), os.path.dirname(os.path.abspath(proj)), os.getcwd()]):
+            ok, ver = run(["npx", "--no-install", "remotion", "versions"], cwd=d)
+            if ok:
+                res["remotion_dir"] = d
+                break
     res["remotion"] = ok
+    # ffmpeg/ffprobe могут быть встроены в Remotion (npx remotion ffmpeg): система не обязательна
+    if ok and not (res["ffmpeg"] and res["ffprobe"]):
+        for tool in ("ffmpeg", "ffprobe"):
+            if not res[tool]:
+                good, _ = run(["npx", "--no-install", "remotion", tool, "-version"], cwd=res.get("remotion_dir", "."))
+                if good: res[tool] = True; res[tool + "_via"] = "remotion"
+    if ok:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "uchi-showreel", "scripts"))
+        try:
+            from mediatools import missing_filters
+            res["ffmpeg_missing_filters"] = missing_filters()
+        except SystemExit:
+            pass
+    if ok: res["remotion_versions"] = ver.splitlines()[:6]
     chromium = any(shutil.which(c) for c in ("chromium", "chromium-browser", "google-chrome"))
     try:
         import playwright  # noqa
@@ -51,8 +72,9 @@ def main():
     except Exception:
         res["network_elevenlabs"] = False
     missing = []
-    if not res["remotion"]: missing.append("Remotion (запасной рендер: Chromium + ffmpeg)")
-    if not res["ffmpeg"] or not res["ffprobe"]: missing.append("ffmpeg/ffprobe")
+    if not res["remotion"]: missing.append("Remotion: установи сам (cd showreel/<slug> && npm init -y && npm i remotion @remotion/cli @remotion/bundler react react-dom) или попроси человека; без него только запасной рендер Chromium + ffmpeg")
+    if not res["ffmpeg"] or not res["ffprobe"]: missing.append("ffmpeg/ffprobe (встроенные в Remotion подойдут: npx remotion ffmpeg)")
+    if res.get("ffmpeg_missing_filters"): missing.append("в ffmpeg нет фильтров: " + ", ".join(res["ffmpeg_missing_filters"]))
     if not res["elevenlabs_key_set"]: missing.append("ключ ElevenLabs: " + kr["message"] + " (или готовая запись диктора)")
     if not fc["ok"]: missing.append("подходящие шрифты (Oceanic Grotesk Condensed ExtraBold, Factor A Regular): " + "; ".join(f["required"] + " — " + f["message"] for f in fc["fonts"] if f["status"] != "ok"))
     if not res["logo"]: missing.append("утверждённый логотип (assets/logo.svg|png)")

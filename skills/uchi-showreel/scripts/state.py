@@ -2,7 +2,7 @@
 """Состояние и гейты проекта ролика. Использование: state.py <init|status|start|done|approve|skip|reset> <папка> [этап]"""
 import argparse, datetime, json, os, sys
 
-STAGES = ["preflight", "script", "gate_script", "assets", "gate_assets", "images", "voiceover", "animation"]
+STAGES = ["preflight", "script", "gate_script", "voiceover", "assets", "gate_assets", "images", "animation"]  # озвучка сразу после гейта 1: от неё зависит тайминг сцен
 GATES = {"gate_script": "script", "gate_assets": "assets"}
 SKIPPABLE = {"images"}
 FONT_STAGES = {"assets", "animation"}

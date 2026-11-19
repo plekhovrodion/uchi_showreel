@@ -66,9 +66,19 @@ python3 skills/uchi-showreel/scripts/state.py status showreel/black-sea
 
 Проверка идёт автоматически: в `preflight` и перед этапами `images` и `voiceover` (`state.py start`). Без годного ключа этап не стартует. Если ключа нет и человек согласился на готовую запись диктора, запустите этап с `--no-key --by "<как согласился>"`.
 
+## Принципы ролика
+
+- Темп спокойный: сцены от 3 секунд, мягкие переходы и пружины, без вспышек и тряски.
+- Только плоские цвета, без градиентов; без мелких паттернов и россыпи фоновых объектов; паттерны без дыр.
+- Анимации плавные и медленные; предложения в кадре начинаются с заглавной буквы.
+- Переходы разные (минимум четыре типа), источники в кадре не показываются.
+- Изображения через ElevenLabs генерируются по запросу в любой момент.
+- Иллюстрации и графики создаются по необходимости (этап 3).
+- Каждый ролик заканчивается призывом перейти на Учи.ру (логотип, текст и последняя реплика диктора).
+
 ## Что нужно для финальной версии
 
-- Remotion (без него работает запасной рендер Chromium + ffmpeg, выход помечается как предварительный).
+- Remotion. Агент проверяет его на этапе 1 и ставит сам (`npm i remotion @remotion/cli ...`) или просит человека. Запасной рендер Chromium + ffmpeg только если установка невозможна, выход тогда предварительный.
 - Шрифты Oceanic Grotesk Condensed ExtraBold и Factor A Regular (OTF, TTF или WOFF2) в `assets/fonts/`.
 - Утверждённый логотип в `assets/logo.svg` или `assets/logo.png`.
 - Ключ ElevenLabs и голос (или готовая запись диктора).
@@ -97,3 +107,10 @@ python3 skills/uchi-showreel/scripts/state.py status showreel/black-sea
 
 - Гайдбук Учи.ру 2026, Figma «Контент-завод».
 - Документация ElevenLabs: https://elevenlabs.io/docs/api-reference/flows/image/create
+
+## Ускорение и экономия (набор для роликов)
+
+- `skills/uchi-showreel-6-animation/kit/` и `scripts/scaffold.py`: готовый набор Remotion (палитра, шрифты, облака, приёмы текста, переходы), сцены правятся в `src/Main.tsx`.
+- `skills/uchi-showreel-5-voiceover/scripts/build_audio.py`: сводит озвучку, музыку и звуки, считает тайминг сцен в `timing.json`. Озвучка идёт сразу после гейта 1.
+- `skills/uchi-showreel/scripts/mediatools.py`: находит ffmpeg/ffprobe, в том числе встроенные в Remotion.
+- `skills/uchi-showreel-6-animation/scripts/contact_sheet.py`: один файл-таблица вместо десятка кадров.

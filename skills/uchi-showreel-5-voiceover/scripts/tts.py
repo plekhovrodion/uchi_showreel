@@ -20,13 +20,24 @@ def _load_key():
 
 def main():
     a = argparse.ArgumentParser()
-    a.add_argument("--voice-id", required=True); a.add_argument("--text-file", required=True)
+    a.add_argument("--voice-id", help="по умолчанию из ../voice.json"); a.add_argument("--text-file", required=True)
     a.add_argument("--out", required=True); a.add_argument("--model", default="eleven_multilingual_v2")
     a.add_argument("--dry-run", action="store_true")
+    a.add_argument("--stability", type=float); a.add_argument("--style", type=float); a.add_argument("--speed", type=float)
+    a.add_argument("--no-defaults", action="store_true", help="не брать голос и настройки из voice.json")
     o = a.parse_args()
+    cfg_p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "voice.json")
+    if not o.no_defaults and os.path.exists(cfg_p):
+        cfg = json.load(open(cfg_p, encoding="utf-8"))
+        o.voice_id = o.voice_id or cfg.get("voice_id")
+        for k in ("stability", "style", "speed"):
+            if getattr(o, k) is None and k in cfg: setattr(o, k, cfg[k])
+    if not o.voice_id: sys.exit("Нужен --voice-id или skills/uchi-showreel-5-voiceover/voice.json")
     text = open(o.text_file, encoding="utf-8").read().strip()
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{o.voice_id}/with-timestamps"
     body = {"text": text, "model_id": o.model}
+    vs = {k: v for k, v in (("stability", o.stability), ("style", o.style), ("speed", o.speed)) if v is not None}
+    if vs: body["voice_settings"] = {**vs, "similarity_boost": 0.8}
     if o.dry_run:
         print("POST", url); print(json.dumps(body, ensure_ascii=False, indent=2)); return
     key = _load_key()
@@ -49,4 +60,5 @@ def main():
     json.dump(words, open(os.path.splitext(o.out)[0] + ".words.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     print("Аудио:", o.out, "слов с таймкодами:", len(words))
 
-main()
+if __name__ == "__main__":
+    main()

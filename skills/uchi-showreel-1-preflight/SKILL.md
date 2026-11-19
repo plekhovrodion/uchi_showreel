@@ -5,6 +5,14 @@ description: Этап 1 производства ролика Учи.ру. Пр�
 
 # Этап 1. Проверка окружения
 
+## Кратко (читай это, остальное по необходимости)
+
+- Запуск: `preflight.py showreel/<slug>`, затем `check_fonts.py`, `check_key.py`. Режим `full` только при всех пяти условиях (Remotion, ключ, шрифты, логотип, сеть).
+- ffmpeg/ffprobe: системные не нужны, годятся встроенные в Remotion (`npx remotion ffmpeg`). Скрипт сам находит их через `uchi-showreel/scripts/mediatools.py`.
+- В сборке ffmpeg из Remotion **нет `alimiter` и `afade`**: громкость ограничивай `loudnorm` (TP=−3), затухание делай `volume='...':eval=frame`. `preflight.py` проверяет нужные фильтры.
+- `npm` может не запустить postinstall у `esbuild` (`npm approve-scripts`): это не мешает рендеру.
+- Шрифты ищи в `~/Library/Fonts` и `~/Downloads` (Oceanic Grotesk Condensed ExtraBold, Factor A Regular), копируй в `assets/fonts/`.
+
 ## Что делать
 
 1. Запусти из корня репозитория:
@@ -23,6 +31,17 @@ description: Этап 1 производства ролика Учи.ру. Пр�
 - Шрифты проверяет `scripts/check_fonts.py` (нужен `fonttools`). Он ищет файлы в `assets/fonts/` проекта и среди системных шрифтов, читает из файла семейство, начертание и вес и проверяет полную кириллицу и цифры. Нужны ровно два начертания: **Oceanic Grotesk Condensed ExtraBold** (вес 800) и **Factor A Regular** (вес 400). Файл с другим начертанием (например, Oceanic Regular или Factor A Medium) не подходит. Результат: `fonts-check.json`, статусы `ok`, `missing`, `wrong_style`, `no_cyrillic`.
 - Утверждённый логотип: файл `assets/logo.svg` или `assets/logo.png`.
 - Доступ в сеть до `api.elevenlabs.io`.
+
+## Remotion: проверка и установка у пользователя
+
+1. Скрипт ищет Remotion в папке ролика, выше неё и в текущей папке (`npx --no-install remotion versions`). Если Node и npm есть, а Remotion нет, ставь его сам, не обходя проверку запасным рендером.
+2. Установка в папку ролика:
+   ```
+   cd showreel/<slug> && npm init -y && npm i remotion @remotion/cli @remotion/bundler react react-dom
+   ```
+   Все пакеты `@remotion/*` и `remotion` должны быть одной версии (без `^`, `npm i --save-exact`). Chromium для рендера Remotion скачает сам при первом рендере.
+3. Если нет самого Node/npm, либо установка не проходит (сеть, права), объясни человеку по-простому, что нужно поставить Node.js LTS (nodejs.org), и попроси сделать это. Не молчи и не переходи на запасной рендер без его ведома.
+4. После установки запусти `preflight.py` снова и убедись, что `remotion: True`.
 
 ## Шрифты: проверка у пользователя
 

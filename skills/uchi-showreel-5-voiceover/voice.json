@@ -1,0 +1,9 @@
+{
+  "name": "Nikolay",
+  "voice_id": "3EuKHIEZbSzrHGNmdYsx",
+  "description": "Nikolay - Professional YouTube and Social media, мужской, русский. Выбран человеком из 10 проб (05).",
+  "model": "eleven_multilingual_v2",
+  "stability": 0.35,
+  "style": 0.5,
+  "speed": 1.1
+}
