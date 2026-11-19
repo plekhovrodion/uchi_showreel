@@ -21,7 +21,7 @@ def _load_key():
 def main():
     a = argparse.ArgumentParser()
     a.add_argument("--voice-id", help="по умолчанию из ../voice.json"); a.add_argument("--text-file", required=True)
-    a.add_argument("--out", required=True); a.add_argument("--model", default="eleven_multilingual_v2")
+    a.add_argument("--out", required=True); a.add_argument("--model", default=None)
     a.add_argument("--dry-run", action="store_true")
     a.add_argument("--stability", type=float); a.add_argument("--style", type=float); a.add_argument("--speed", type=float)
     a.add_argument("--no-defaults", action="store_true", help="не брать голос и настройки из voice.json")
@@ -30,8 +30,10 @@ def main():
     if not o.no_defaults and os.path.exists(cfg_p):
         cfg = json.load(open(cfg_p, encoding="utf-8"))
         o.voice_id = o.voice_id or cfg.get("voice_id")
+        o.model = o.model or cfg.get("model")
         for k in ("stability", "style", "speed"):
             if getattr(o, k) is None and k in cfg: setattr(o, k, cfg[k])
+    o.model = o.model or "eleven_v4"
     if not o.voice_id: sys.exit("Нужен --voice-id или skills/uchi-showreel-5-voiceover/voice.json")
     text = open(o.text_file, encoding="utf-8").read().strip()
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{o.voice_id}/with-timestamps"

@@ -9,7 +9,8 @@ from mediatools import ffmpeg
 if len(sys.argv) < 2: sys.exit(__doc__)
 os.chdir(sys.argv[1])
 FPS, TAIL, MIN_SCENE = 60, 1.5, 3.2
-words = json.load(open('audio/voice.words.raw.json', encoding='utf-8')) if os.path.exists('audio/voice.words.raw.json') else None
+raw_ok = os.path.exists('audio/voice.words.raw.json') and os.path.getmtime('audio/voice.words.raw.json') >= os.path.getmtime('audio/voice.mp3')  # сырые слова старше голоса: голос перегенерирован
+words = json.load(open('audio/voice.words.raw.json', encoding='utf-8')) if raw_ok else None
 if words is None:
     words = json.load(open('audio/voice.words.json', encoding='utf-8'))
     json.dump(words, open('audio/voice.words.raw.json', 'w', encoding='utf-8'), ensure_ascii=False, indent=2)

@@ -31,7 +31,7 @@ def _load_key():
 
 def main():
     a = argparse.ArgumentParser()
-    a.add_argument("--model", default="gemini-3.1-flash-image", help="model_id; для прозрачного фона gpt-image-1.5"); a.add_argument("--prompt", required=True)
+    a.add_argument("--model", default="gpt-image-2.5-flare", help="model_id; для прозрачного фона gpt-image-1.5"); a.add_argument("--prompt", required=True)
     a.add_argument("--aspect"); a.add_argument("--resolution"); a.add_argument("--seed", type=int)
     a.add_argument("--quality"); a.add_argument("--background")
     a.add_argument("--status-path", default="/v1/flows/image/{id}")

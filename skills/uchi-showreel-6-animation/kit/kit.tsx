@@ -1,7 +1,7 @@
 // Набор помощников для роликов Учи.ру в Remotion. Всё считается от номера кадра, 60 fps.
 import React from 'react';
 import {AbsoluteFill, Easing, interpolate, staticFile} from 'remotion';
-import {C} from './brand';
+import {C, HEAD, BODY} from './brand';
 import {CLOUD_BACK, CLOUD_FRONT} from './clouds';
 import words from './words.json';
 import timing from './timing.json';
@@ -33,10 +33,20 @@ export const Pop: React.FC<{lf: number; d: number; children: React.ReactNode}> =
 export const Svg: React.FC<{children: React.ReactNode}> = ({children}) => (
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', left: 0, top: 0}}>{children}</svg>
 );
+// Облака едут слева направо без швов: копии зеркалятся, период 2160 px
+const CloudRow: React.FC<{d: string; fill: string; o: number}> = ({d, fill, o}) => (
+  <g>
+    {[-2, -1, 0, 1].map((k) => (
+      <g key={k} transform={k % 2 === 0 ? `translate(${o + 1080 * k} 0)` : `translate(${o + 1080 * k + 1080} 0) scale(-1 1)`}>
+        <path d={d} fill={fill} />
+      </g>
+    ))}
+  </g>
+);
 export const Clouds: React.FC<{f: number; back: string; front: string}> = ({f, back, front}) => (
   <g>
-    <g transform={`translate(0 ${drift(f, 14, 330)})`}><path d={CLOUD_BACK} fill={back} /></g>
-    <g transform={`translate(0 ${drift(f, 14, 330, 110)})`}><path d={CLOUD_FRONT} fill={front} /></g>
+    <g transform={`translate(0 ${drift(f, 14, 330)})`}><CloudRow d={CLOUD_BACK} fill={back} o={(f * 0.8) % 2160} /></g>
+    <g transform={`translate(0 ${drift(f, 14, 330, 110)})`}><CloudRow d={CLOUD_FRONT} fill={front} o={(f * 1.3) % 2160} /></g>
   </g>
 );
 export const Shape: React.FC<{d: string; fill: string; x: number; y: number; s: number; side?: string; rot?: number}> = ({d, fill, x, y, s, side = C.ink, rot = 0}) => (
@@ -60,15 +70,15 @@ export const Wipe: React.FC<{f: number; from: number; to: number; color: string}
     </svg>
   );
 };
-export const WordT: React.FC<{f: number; from: number; to: number; color: string}> = ({f, from, to, color}) => {
+export const WordT: React.FC<{f: number; from: number; to: number; color: string; word?: string}> = ({f, from, to, color, word = 'Слово'}) => {
   if (f < from || f > to) return null;
   const p = (f - from) / (to - from);
   const sc = Math.exp(interpolate(p, [0, 1], [Math.log(0.5), Math.log(26)], {easing: Easing.bezier(0.5, 0, 0.9, 0.6)}));
-  const fillA = interpolate(p, [0.8, 1], [0, 1], clamp);
+  const fillA = interpolate(p, [0.94, 1], [0, 1], clamp);
   return (
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position: 'absolute', left: 0, top: 0}}>
       <g transform={`translate(540 960) scale(${sc}) translate(-540 -960)`}>
-        <text x={540} y={1030} textAnchor="middle" fontFamily={HEAD} fontWeight={800} fontSize={200} fill={color}>Босфор</text>
+        <text x={540} y={1030} textAnchor="middle" fontFamily={HEAD} fontWeight={800} fontSize={200} fill={color}>{word}</text>
       </g>
       <rect width={W} height={H} fill={color} opacity={fillA} />
     </svg>
@@ -79,3 +89,18 @@ export const Layer: React.FC<{style?: Sty; children: React.ReactNode}> = ({style
   <AbsoluteFill style={style}>{children}</AbsoluteFill>
 );
 
+
+/** Плашка с текстом: отступы слева и справа от текста равны (ширина берётся по измеренному тексту). */
+export const Plaque: React.FC<{x: number; y: number; h?: number; text: string; size?: number; font?: string; fill: string; color: string; pad?: number; bold?: boolean}> = ({x, y, h = 104, text, size = 52, font = BODY, fill, color, pad = 30, bold = false}) => {
+  const ref = React.useRef<SVGTextElement>(null);
+  const [w, setW] = React.useState(0);
+  React.useLayoutEffect(() => {
+    if (ref.current) setW(ref.current.getBBox().width);
+  }, [text, size, font]);
+  return (
+    <g>
+      <rect x={x} y={y} width={w + pad * 2} height={h} fill={fill} />
+      <text ref={ref} x={x + pad} y={y + h / 2 + size * 0.35} fontFamily={font} fontWeight={bold ? 800 : 400} fontSize={size} fill={color}>{text}</text>
+    </g>
+  );
+};
