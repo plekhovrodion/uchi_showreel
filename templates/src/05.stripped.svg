@@ -1,0 +1,20 @@
+<svg width="1080" height="1917" viewBox="0 0 1080 1917" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g clip-path="url(#clip0_48_4)">
+<rect width="1080" height="1917" fill="#DFD9FF"/>
+<text fill="#362F73" style="white-space: pre" xml:space="preserve" font-family="Oceanic Grotesk Condensed" font-size="160" font-weight="800" letter-spacing="0em"><tspan x="60" y="352">&#x417;&#x430;&#x433;&#x43e;&#x43b;&#x43e;&#x432;&#x43e;&#x43a;</tspan></text>
+<text fill="#362F73" style="white-space: pre" xml:space="preserve" font-family="Factor A" font-size="48" letter-spacing="0em"><tspan x="60" y="459.8">&#x41f;&#x43e;&#x434;&#x437;&#x430;&#x433;&#x43e;&#x43b;&#x43e;&#x432;&#x43e;&#x43a;</tspan></text>
+<rect width="432" height="102" transform="translate(60 534)" fill="#6656F7"/>
+<text fill="white" style="white-space: pre" xml:space="preserve" font-family="Factor A" font-size="48" letter-spacing="0em"><tspan x="84" y="601.8">&#x422;&#x435;&#x43a;&#x441;&#x442; &#x432;&#x44b;&#x434;&#x435;&#x43b;&#x435;&#x43d;&#x438;&#x435;</tspan></text>
+<path d="M398.791 1430.64C581.511 1114.15 900.691 956.331 1111.68 1078.15C1243.32 1154.15 1301.75 1321.05 1282.7 1512.71C1404.44 1311.2 1610.21 1212.15 1747.09 1291.18C1824.58 1335.92 1863.68 1428.32 1862.41 1537.49C1877.68 1501.65 1895.48 1465.91 1915.84 1430.65C2098.56 1114.16 2417.74 956.35 2628.73 1078.17C2803.39 1179 2849.17 1439.84 2756.11 1706.21H2742.44V1917.06H-1723.99V1706.23H-1724C-1724 1706.22 -1724 1706.21 -1723.99 1706.2V1704.9H-1723.72C-1712.83 1653.6 -1692.7 1600.52 -1663.09 1549.23C-1558.97 1368.9 -1377.11 1278.98 -1256.89 1348.39C-1194.44 1384.44 -1160.91 1456.4 -1157.69 1542.5C-1142.98 1508.03 -1125.85 1473.66 -1106.27 1439.76C-929.637 1133.82 -621.099 981.266 -417.139 1099.02C-279.579 1178.44 -224.719 1360.54 -257.769 1564.55C-100.739 1382.44 111.291 1305.16 260.171 1391.11C303.941 1416.38 338.211 1453.43 362.791 1498.92C373.741 1476.03 385.741 1453.23 398.791 1430.64Z" fill="#ADA4FF"/>
+<rect y="672" width="1400" height="1400" fill="url(#pattern0_48_4)"/>
+</g>
+<defs>
+<pattern id="pattern0_48_4" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_48_4" transform="translate(0 -0.0278351) scale(0.00103093)"/>
+</pattern>
+<clipPath id="clip0_48_4">
+<rect width="1080" height="1917" fill="white"/>
+</clipPath>
+<image id="image0_48_4" width="970" height="1024" preserveAspectRatio="none" xlink:href="@IMG0@"/>
+</defs>
+</svg>

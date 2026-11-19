@@ -4,7 +4,7 @@
   1080,
   1917
  ],
- "status": "выгружено 13 из 16 (SVG, HTML, PNG); 05, 07, 09 содержат встроенные растровые картинки 1.3–2.8 МБ и ждут ручного экспорта или доступа к www.figma.com",
+ "status": "выгружено 16 из 16 (SVG, HTML, PNG). 05, 07, 09 собраны из векторной части Figma и картинок, присланных вручную (assets/)",
  "templates": [
   {
    "n": "01",
@@ -56,7 +56,10 @@
    "node_id": "48:4",
    "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=48-4",
    "layers": "Content сверху; Image 1400×1400 для картинки; фон",
-   "status": "pending: embedded raster, needs manual export"
+   "status": "exported",
+   "svg": "svg/05.svg",
+   "html": "html/05.html",
+   "png": "png/05.png"
   },
   {
    "n": "06",
@@ -75,7 +78,10 @@
    "node_id": "57:2079",
    "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-2079",
    "layers": "Три полосы фона, «Фото» 920×990, без текста",
-   "status": "pending: embedded raster, needs manual export"
+   "status": "exported",
+   "svg": "svg/07.svg",
+   "html": "html/07.html",
+   "png": "png/07.png"
   },
   {
    "n": "08",
@@ -94,7 +100,10 @@
    "node_id": "57:4262",
    "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4262",
    "layers": "Title и Subtitle; Rounded rectangle 1372×1184 под изображение; фон",
-   "status": "pending: embedded raster, needs manual export"
+   "status": "exported",
+   "svg": "svg/09.svg",
+   "html": "html/09.html",
+   "png": "png/09.png"
   },
   {
    "n": "10",
