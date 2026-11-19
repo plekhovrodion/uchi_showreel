@@ -30,10 +30,13 @@ def main():
         except Exception:
             res[mod.lower()] = False
     res["elevenlabs_key_set"] = bool(os.environ.get("ELEVENLABS_API_KEY"))
-    fl = run(["fc-list"])[1].lower() if shutil.which("fc-list") else ""
-    local = [os.path.basename(p).lower() for p in glob.glob(os.path.join(proj, "assets", "fonts", "*"))]
-    fonts = {"oceanic_grotesk_condensed": "oceanic" in fl or any("oceanic" in n for n in local),
-             "factor_a": "factor" in fl or any("factor" in n for n in local)}
+    chk = os.path.join(os.path.dirname(os.path.abspath(__file__)), "check_fonts.py")
+    run([sys.executable, chk, proj, "--quiet"])
+    try:
+        fc = json.load(open(os.path.join(proj, "fonts-check.json"), encoding="utf-8"))
+    except Exception:
+        fc = {"ok": False, "fonts": []}
+    fonts = {f["required"]: f["status"] for f in fc["fonts"]} or {"fonts": "not_checked"}
     res["fonts"] = fonts
     res["logo"] = bool(glob.glob(os.path.join(proj, "assets", "logo.*")))
     try:
@@ -47,7 +50,7 @@ def main():
     if not res["remotion"]: missing.append("Remotion (запасной рендер: Chromium + ffmpeg)")
     if not res["ffmpeg"] or not res["ffprobe"]: missing.append("ffmpeg/ffprobe")
     if not res["elevenlabs_key_set"]: missing.append("ELEVENLABS_API_KEY или готовая запись диктора")
-    if not all(fonts.values()): missing.append("файлы шрифтов Oceanic Grotesk Condensed ExtraBold и Factor A")
+    if not fc["ok"]: missing.append("подходящие шрифты (Oceanic Grotesk Condensed ExtraBold, Factor A Regular): " + "; ".join(f["required"] + " — " + f["message"] for f in fc["fonts"] if f["status"] != "ok"))
     if not res["logo"]: missing.append("утверждённый логотип (assets/logo.svg|png)")
     if not res["network_elevenlabs"]: missing.append("доступ в сеть до api.elevenlabs.io")
     res["missing"] = missing
