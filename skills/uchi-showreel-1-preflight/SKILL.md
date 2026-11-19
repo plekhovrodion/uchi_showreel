@@ -20,9 +20,16 @@ description: Этап 1 производства ролика Учи.ру. Пр�
 - Node, npm, Remotion (`npx --no-install remotion --version`), Chromium/Playwright, ffmpeg, ffprobe.
 - Python-модули Pillow, Whisper (Whisper нужен только для транскрипции и черновых таймкодов).
 - `ELEVENLABS_API_KEY` в окружении.
-- Шрифты Oceanic Grotesk Condensed ExtraBold и Factor A Regular: в системе или в `assets/fonts/` (OTF, TTF, WOFF2).
+- Шрифты проверяет `scripts/check_fonts.py` (нужен `fonttools`). Он ищет файлы в `assets/fonts/` проекта и среди системных шрифтов, читает из файла семейство, начертание и вес и проверяет полную кириллицу и цифры. Нужны ровно два начертания: **Oceanic Grotesk Condensed ExtraBold** (вес 800) и **Factor A Regular** (вес 400). Файл с другим начертанием (например, Oceanic Regular или Factor A Medium) не подходит. Результат: `fonts-check.json`, статусы `ok`, `missing`, `wrong_style`, `no_cyrillic`.
 - Утверждённый логотип: файл `assets/logo.svg` или `assets/logo.png`.
 - Доступ в сеть до `api.elevenlabs.io`.
+
+## Шрифты: проверка у пользователя
+
+1. Спроси человека, есть ли у него файлы шрифтов, и попроси положить их в `showreel/<slug>/assets/fonts/` (или прикрепить в чат, тогда скопируй туда сам). Скачать можно в гайдбуке Учи.ру, раздел «Типографика», кнопка «Скачать шрифты».
+2. Запусти `python3 skills/uchi-showreel-1-preflight/scripts/check_fonts.py showreel/<slug>`.
+3. Если статус не `ok`, назови человеку точную причину из отчёта (нет файла, не то начертание, нет кириллицы) и попроси нужный файл. Не подставляй похожий шрифт молча.
+4. Работать на временных шрифтах можно, только если человек прямо согласился. Тогда в `state.py start` добавь `--preview-fonts --by "<как согласился>"`, а выход помечай как предварительный.
 
 ## Режимы
 
@@ -35,4 +42,4 @@ description: Этап 1 производства ролика Учи.ру. Пр�
 
 ## Готово, когда
 
-`00-preflight.json` создан, режим назван человеку, перечислено недостающее. Затем `state.py done preflight`.
+`00-preflight.json` и `fonts-check.json` созданы, режим назван человеку, перечислено недостающее, по шрифтам человек дал файлы или согласился на временные. Затем `state.py done preflight`.

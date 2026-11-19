@@ -7,7 +7,7 @@ description: Этап 6 производства ролика Учи.ру. Со�
 
 ## Вход
 
-`script.md`, `storyboard.md`, `assets/`, `keyframes/` (утверждённые), `images/` (если есть), `audio/mix.*`, `timing.json`. Без утверждённых гейтов 1 и 2 не начинай.
+`fonts-check.json` со статусом `ok` (повторно запусти `check_fonts.py` непосредственно перед рендером), `script.md`, `storyboard.md`, `assets/`, `keyframes/` (утверждённые), `images/` (если есть), `audio/mix.*`, `timing.json`. Без утверждённых гейтов 1 и 2 и без подходящих шрифтов не начинай. В `final.mp4` должны быть именно проверенные шрифты из `assets/fonts/`, а не системная замена.
 
 ## Правила сборки
 

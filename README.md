@@ -27,6 +27,16 @@ flowchart LR
 | 6 | [`uchi-showreel-6-animation`](skills/uchi-showreel-6-animation/SKILL.md) | Remotion, блюр-типографика, паттерны, переходы, проверка MP4 | `out/final.mp4` |
 | + | [`uchi-svg-icons`](skills/uchi-svg-icons/SKILL.md) | SVG-иконки Учи.ру в коде, проверка палитры | `*.svg`, `*.png` |
 
+## Проверка шрифтов
+
+Перед этапами 3 и 6 `state.py` требует свежий `fonts-check.json` и отказывает, если шрифты не подходят. Нужны **Oceanic Grotesk Condensed ExtraBold** и **Factor A Regular** с полной кириллицей, файлы кладутся в `showreel/<slug>/assets/fonts/`.
+
+```bash
+python3 skills/uchi-showreel-1-preflight/scripts/check_fonts.py showreel/black-sea
+```
+
+Работать на временных шрифтах можно только с явного согласия человека: `state.py start <проект> <этап> --preview-fonts --by "..."`. Для проверки нужен `fonttools`.
+
 ## Точки согласования
 
 - **Гейт 1** после этапа 2: человек утверждает текст озвучки и раскадровку.
@@ -62,6 +72,7 @@ python3 skills/uchi-showreel/scripts/state.py status showreel/black-sea
 |---|---|
 | `uchi-showreel/scripts/state.py` | состояние проекта, порядок этапов, гейты |
 | `uchi-showreel-1-preflight/scripts/preflight.py` | проверка окружения |
+| `uchi-showreel-1-preflight/scripts/check_fonts.py` | проверка шрифтов: семейство, начертание, вес, кириллица; пишет `fonts-check.json` |
 | `uchi-showreel-4-images/scripts/eleven_image.py` | `POST /v1/flows/image`; `--dry-run` показывает запрос |
 | `uchi-showreel-5-voiceover/scripts/tts.py` | озвучка с таймкодами слов; `--dry-run` показывает запрос |
 | `uchi-showreel-6-animation/scripts/fallback_render.py` | запасной рендер Chromium + ffmpeg |
@@ -70,7 +81,7 @@ python3 skills/uchi-showreel/scripts/state.py status showreel/black-sea
 
 ## Что проверено, а что нет
 
-Запускалось: `state.py`, `preflight.py`, `verify_mp4.py`, `check_icon.py`, `--dry-run` у `eleven_image.py` и `tts.py`, компиляция всех скриптов.
+Запускалось: `check_fonts.py` (на тестовых файлах: подходящие, не то начертание, нет файла), отказ `state.py` при плохих шрифтах, `state.py`, `preflight.py`, `verify_mp4.py`, `check_icon.py`, `--dry-run` у `eleven_image.py` и `tts.py`, компиляция всех скриптов.
 
 Не проверялось: реальные вызовы ElevenLabs (нужны ключ и сеть) и `fallback_render.py` как скрипт (логика взята из рендера превью про Чёрное море). У API изображений путь GET-запроса результата не зашит: возьмите его из документации и передайте как `--status-path`. Эндпоинт озвучки `with-timestamps` сверьте с актуальной документацией перед первым запуском.
 
