@@ -1,0 +1,16 @@
+{
+  "source": "Гайдбук Учи.ру 2026; значения из скилла uchi-icons",
+  "primary": {
+    "violet": ["#6656F7", "#ADA4FF", "#DFD9FF", "#362F73"],
+    "coral": ["#FE5C57", "#FF8A86", "#FFC5C3", "#741E1B"],
+    "yellow": ["#FFCF24", "#FFE16C", "#FFFFA3", "#6B501A"],
+    "white": ["#FFFFFF"]
+  },
+  "secondary_teens_only": {
+    "pink": ["#FF6ED1", "#FFB8E9", "#FFDAF3", "#702759"],
+    "lime": ["#BDF829", "#DDFF88", "#F3FFD7", "#495822"],
+    "blue": ["#5CB6FF", "#B1DCFF", "#D5ECFF", "#2C475C"]
+  },
+  "dark_background": {"background": "#442BAB", "shadow": "#2B1B78"},
+  "proportions": {"violet_shades": 0.4, "bright_main_and_secondary": 0.3, "pastel": 0.2, "text": 0.1}
+}
