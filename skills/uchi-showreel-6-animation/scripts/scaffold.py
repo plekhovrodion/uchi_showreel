@@ -6,7 +6,7 @@ d = sys.argv[1] if len(sys.argv) > 1 else sys.exit(__doc__)
 kit = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "kit")
 src, pub = os.path.join(d, "src"), os.path.join(d, "public")
 os.makedirs(src, exist_ok=True); os.makedirs(os.path.join(pub, "fonts"), exist_ok=True); os.makedirs(os.path.join(pub, "audio"), exist_ok=True)
-for f in ("brand.tsx", "clouds.ts", "kit.tsx", "Root.tsx", "index.ts", "Main.tsx"):
+for f in ("brand.tsx", "clouds.ts", "kit.tsx", "fx.tsx", "Root.tsx", "index.ts", "Main.tsx"):
     dst = os.path.join(src, f)
     if os.path.exists(dst) and f == "Main.tsx": print("Main.tsx уже есть, не трогаю"); continue
     shutil.copy(os.path.join(kit, f), dst)

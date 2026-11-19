@@ -1,0 +1,28 @@
+<!doctype html><meta charset="utf-8"><style>
+@font-face{font-family:H;src:url("../showreel/lomonosov/assets/fonts/Oceanic Grotesk Condensed-Extrabold-Web.ttf");font-weight:800}
+@font-face{font-family:B;src:url("../showreel/lomonosov/assets/fonts/Factor A-Regular-Web.ttf")}
+body{margin:0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs><marker id="a" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" refX="12" refY="15" orient="auto"><path d="M0,2 L26,15 L0,28 z" fill="#362F73"/></marker></defs>
+<rect width="1920" height="1080" fill="#DFD9FF"/>
+<text x="960" y="200" text-anchor="middle" font-family="H" font-weight="800" font-size="88" fill="#362F73">Как работает пайплайн: два шага утверждает человек</text>
+<g id="n"></g>
+<script>
+const S=[["s","Сценарий",["Пишет сценарий","и раскадровку"]],["h","Человек",["Утверждает","сценарий"]],["s","Озвучка",["Озвучивает текст,","считает тайминг"]],["s","Макеты",["Рисует ключевые","кадры 9:16"]],["h","Человек",["Утверждает","макеты"]],["s","Картинки",["Генерирует","изображения"]],["s","Анимация",["Собирает и","рендерит MP4"]]];
+const ns="http://www.w3.org/2000/svg",g=document.getElementById("n");
+function el(t,a,txt){const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;g.appendChild(e);return e}
+const w=220,gap=50,x0=(1920-(7*w+6*gap))/2,y=380,h=400;let sk=0;
+S.forEach((s,i)=>{const x=x0+i*(w+gap),cx=x+w/2,hu=s[0]==="h";
+ el("rect",{x:x+8,y:y+10,width:w,height:h,rx:36,fill:"#362F73"});
+ el("rect",{x,y,width:w,height:h,rx:36,fill:hu?"#FE5C57":"#fff"});
+ const tc=hu?"#fff":"#362F73";
+ if(!hu){sk++;el("circle",{cx,cy:y+75,r:44,fill:"#6656F7"});
+  el("text",{x:cx,y:y+97,"text-anchor":"middle","font-family":"H","font-weight":800,"font-size":62,fill:"#fff"},sk);}
+ else{el("circle",{cx,cy:y+75,r:44,fill:"#fff"});
+  el("path",{d:`M${cx-16},${y+78} l12,14 l24,-30`,fill:"none",stroke:"#FE5C57","stroke-width":10,"stroke-linecap":"round","stroke-linejoin":"round"});}
+ el("text",{x:cx,y:y+185,"text-anchor":"middle","font-family":"H","font-weight":800,"font-size":hu?56:48,fill:tc},s[1]);
+ el("text",{x:cx,y:y+245,"text-anchor":"middle","font-family":"B","font-size":23,fill:tc},hu?"":"Скилл:");
+ s[2].forEach((l,k)=>el("text",{x:cx,y:y+(hu?260:290)+k*36,"text-anchor":"middle","font-family":"B","font-size":23,fill:tc},l));
+ if(i<6)el("path",{d:`M${x+w+12},${y+h/2} H${x+w+gap-10}`,fill:"none",stroke:"#362F73","stroke-width":8,"stroke-linecap":"round","marker-end":"url(#a)"});});
+</script>
+</svg>
