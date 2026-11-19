@@ -1,122 +1,177 @@
 {
-  "source": "Figma «Контент-завод» H05HfxWCK8Ji80GDZyPA0n, секция «Шаблоны» 55:1198",
-  "size": [
-    1080,
-    1917
-  ],
-  "status": "только индекс: файлы SVG/PNG/HTML не выгружены, хост www.figma.com заблокирован политикой сети",
-  "templates": [
-    {
-      "n": "01",
-      "name": "Шаблон 01",
-      "node_id": "55:1311",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1311",
-      "layers": "Content (Title, Subtitle, Highlight) сверху; иллюстрация планшет; фон-волна внизу"
-    },
-    {
-      "n": "02",
-      "name": "Шаблон 02",
-      "node_id": "55:1672",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1672",
-      "layers": "Логотип (instance Logo) сверху; Title и Subtitle по центру; фон-облака"
-    },
-    {
-      "n": "03",
-      "name": "Шаблон 03",
-      "node_id": "55:1742",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1742",
-      "layers": "Content сверху; иллюстрация «Книга» (Book, Pages, Bookmark); фон-облака"
-    },
-    {
-      "n": "04",
-      "name": "Шаблон 04",
-      "node_id": "55:1910",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1910",
-      "layers": "Иллюстрация «Устройство» (Game Controller) сверху; Content снизу; зигзаг-фон"
-    },
-    {
-      "n": "05",
-      "name": "Шаблон 05",
-      "node_id": "48:4",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=48-4",
-      "layers": "Content сверху; Image 1400×1400 для картинки; фон"
-    },
-    {
-      "n": "06",
-      "name": "Шаблон 06",
-      "node_id": "55:268",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-268",
-      "layers": "Content сверху; иллюстрация в круге; фон-облака"
-    },
-    {
-      "n": "07",
-      "name": "Шаблон 07",
-      "node_id": "57:2079",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-2079",
-      "layers": "Три полосы фона, «Фото» 920×990, без текста"
-    },
-    {
-      "n": "08",
-      "name": "Шаблон 08",
-      "node_id": "57:2180",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-2180",
-      "layers": "Union-форма с Overline 895×129"
-    },
-    {
-      "n": "09",
-      "name": "Шаблон 09",
-      "node_id": "57:4262",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4262",
-      "layers": "Title и Subtitle; Rounded rectangle 1372×1184 под изображение; фон"
-    },
-    {
-      "n": "10",
-      "name": "Шаблон 10",
-      "node_id": "57:4490",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4490",
-      "layers": "Title и Subtitle сверху; Illustration с 2 слоями Background и Image Area; группа-иллюстрация"
-    },
-    {
-      "n": "11",
-      "name": "Шаблон 11",
-      "node_id": "57:4549",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4549",
-      "layers": "Union-форма с Overline; фон"
-    },
-    {
-      "n": "12",
-      "name": "Шаблон 12",
-      "node_id": "57:4554",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4554",
-      "layers": "Union-форма с Overline; фон"
-    },
-    {
-      "n": "13",
-      "name": "Шаблон 13",
-      "node_id": "57:4615",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4615",
-      "layers": "Text Content (Title, Subtitle, Highlight); Rectangle; фон"
-    },
-    {
-      "n": "14",
-      "name": "Шаблон 14",
-      "node_id": "57:4744",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4744",
-      "layers": "Text Content (Title, Subtitle, Highlight); Rectangle; фон"
-    },
-    {
-      "n": "15",
-      "name": "Шаблон 15",
-      "node_id": "57:4939",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4939",
-      "layers": "Content снизу; иллюстрация Device (Screen, Speaker, Camera); Highlight смещён"
-    },
-    {
-      "n": "16",
-      "name": "Шаблон 16",
-      "node_id": "60:5170",
-      "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=60-5170",
-      "layers": "Large Title 960×744; фон"
-    }
-  ]
+ "source": "Figma «Контент-завод» H05HfxWCK8Ji80GDZyPA0n, секция «Шаблоны» 55:1198",
+ "size": [
+  1080,
+  1917
+ ],
+ "status": "выгружено 13 из 16 (SVG, HTML, PNG); 05, 07, 09 содержат встроенные растровые картинки 1.3–2.8 МБ и ждут ручного экспорта или доступа к www.figma.com",
+ "templates": [
+  {
+   "n": "01",
+   "name": "Шаблон 01",
+   "node_id": "55:1311",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1311",
+   "layers": "Content (Title, Subtitle, Highlight) сверху; иллюстрация планшет; фон-волна внизу",
+   "status": "exported",
+   "svg": "svg/01.svg",
+   "html": "html/01.html",
+   "png": "png/01.png"
+  },
+  {
+   "n": "02",
+   "name": "Шаблон 02",
+   "node_id": "55:1672",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1672",
+   "layers": "Логотип (instance Logo) сверху; Title и Subtitle по центру; фон-облака",
+   "status": "exported",
+   "svg": "svg/02.svg",
+   "html": "html/02.html",
+   "png": "png/02.png"
+  },
+  {
+   "n": "03",
+   "name": "Шаблон 03",
+   "node_id": "55:1742",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1742",
+   "layers": "Content сверху; иллюстрация «Книга» (Book, Pages, Bookmark); фон-облака",
+   "status": "exported",
+   "svg": "svg/03.svg",
+   "html": "html/03.html",
+   "png": "png/03.png"
+  },
+  {
+   "n": "04",
+   "name": "Шаблон 04",
+   "node_id": "55:1910",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-1910",
+   "layers": "Иллюстрация «Устройство» (Game Controller) сверху; Content снизу; зигзаг-фон",
+   "status": "exported",
+   "svg": "svg/04.svg",
+   "html": "html/04.html",
+   "png": "png/04.png"
+  },
+  {
+   "n": "05",
+   "name": "Шаблон 05",
+   "node_id": "48:4",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=48-4",
+   "layers": "Content сверху; Image 1400×1400 для картинки; фон",
+   "status": "pending: embedded raster, needs manual export"
+  },
+  {
+   "n": "06",
+   "name": "Шаблон 06",
+   "node_id": "55:268",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=55-268",
+   "layers": "Content сверху; иллюстрация в круге; фон-облака",
+   "status": "exported",
+   "svg": "svg/06.svg",
+   "html": "html/06.html",
+   "png": "png/06.png"
+  },
+  {
+   "n": "07",
+   "name": "Шаблон 07",
+   "node_id": "57:2079",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-2079",
+   "layers": "Три полосы фона, «Фото» 920×990, без текста",
+   "status": "pending: embedded raster, needs manual export"
+  },
+  {
+   "n": "08",
+   "name": "Шаблон 08",
+   "node_id": "57:2180",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-2180",
+   "layers": "Union-форма с Overline 895×129",
+   "status": "exported",
+   "svg": "svg/08.svg",
+   "html": "html/08.html",
+   "png": "png/08.png"
+  },
+  {
+   "n": "09",
+   "name": "Шаблон 09",
+   "node_id": "57:4262",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4262",
+   "layers": "Title и Subtitle; Rounded rectangle 1372×1184 под изображение; фон",
+   "status": "pending: embedded raster, needs manual export"
+  },
+  {
+   "n": "10",
+   "name": "Шаблон 10",
+   "node_id": "57:4490",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4490",
+   "layers": "Title и Subtitle сверху; Illustration с 2 слоями Background и Image Area; группа-иллюстрация",
+   "status": "exported",
+   "svg": "svg/10.svg",
+   "html": "html/10.html",
+   "png": "png/10.png"
+  },
+  {
+   "n": "11",
+   "name": "Шаблон 11",
+   "node_id": "57:4549",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4549",
+   "layers": "Union-форма с Overline; фон",
+   "status": "exported",
+   "svg": "svg/11.svg",
+   "html": "html/11.html",
+   "png": "png/11.png"
+  },
+  {
+   "n": "12",
+   "name": "Шаблон 12",
+   "node_id": "57:4554",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4554",
+   "layers": "Union-форма с Overline; фон",
+   "status": "exported",
+   "svg": "svg/12.svg",
+   "html": "html/12.html",
+   "png": "png/12.png"
+  },
+  {
+   "n": "13",
+   "name": "Шаблон 13",
+   "node_id": "57:4615",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4615",
+   "layers": "Text Content (Title, Subtitle, Highlight); Rectangle; фон",
+   "status": "exported",
+   "svg": "svg/13.svg",
+   "html": "html/13.html",
+   "png": "png/13.png"
+  },
+  {
+   "n": "14",
+   "name": "Шаблон 14",
+   "node_id": "57:4744",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4744",
+   "layers": "Text Content (Title, Subtitle, Highlight); Rectangle; фон",
+   "status": "exported",
+   "svg": "svg/14.svg",
+   "html": "html/14.html",
+   "png": "png/14.png"
+  },
+  {
+   "n": "15",
+   "name": "Шаблон 15",
+   "node_id": "57:4939",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=57-4939",
+   "layers": "Content снизу; иллюстрация Device (Screen, Speaker, Camera); Highlight смещён",
+   "status": "exported",
+   "svg": "svg/15.svg",
+   "html": "html/15.html",
+   "png": "png/15.png"
+  },
+  {
+   "n": "16",
+   "name": "Шаблон 16",
+   "node_id": "60:5170",
+   "url": "https://www.figma.com/design/H05HfxWCK8Ji80GDZyPA0n/?node-id=60-5170",
+   "layers": "Large Title 960×744; фон",
+   "status": "exported",
+   "svg": "svg/16.svg",
+   "html": "html/16.html",
+   "png": "png/16.png"
+  }
+ ]
 }
